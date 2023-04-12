@@ -10,18 +10,24 @@ function App() {
     setDarkMode(!darkMode);
     console.log("dark mode : " + darkMode);
     if (darkMode) {
-      document.body.classList.remove("dark");
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+      document.documentElement.style.colorScheme = "light";
       console.log("removed darkMode");
     } else {
-      document.body.classList.add("dark");
+      document.documentElement.classList.remove("light");
+      document.documentElement.classList.add("dark");
+      document.documentElement.style.colorScheme = "dark";
       console.log("added darkMode");
     }
   }
   return (
-    <div className="flex flex-col">
-      <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      <CenterButton />
-      <Footer />
+    <div>
+      <div className="flex flex-col">
+        <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        <CenterButton />
+        <Footer />
+      </div>
     </div>
   );
 }

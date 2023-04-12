@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark" style="color-scheme: dark">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/gourav.webp" />
@@ -16,8 +16,34 @@
     />
     <title>Theme - Dark/Light</title>
   </head>
-  <body class="bg-white dark:bg-black">
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+  <body>
+    <script>
+      !(function () {
+        try {
+          var root = document.documentElement,
+            c = root.classList;
+          c.remove("light", "dark");
+          var e = localStorage.getItem("theme");
+          if ("system" === e || (!e && true)) {
+            var t = "(prefers-color-scheme: dark)",
+              m = window.matchMedia(t);
+            if (m.media !== t || m.matches) {
+              root.style.colorScheme = "dark";
+              c.add("dark");
+            } else {
+              root.style.colorScheme = "light";
+              c.add("light");
+            }
+          } else if (e) {
+            c.add(e || "");
+          }
+          if (e === "light" || e === "dark") root.style.colorScheme = e;
+        } catch (e) {}
+      })();
+    </script>
+    <div
+      class="dark:bg-black transition-all duration-150 ease-in-out"
+      id="root"
+    ></div>
   </body>
 </html>
